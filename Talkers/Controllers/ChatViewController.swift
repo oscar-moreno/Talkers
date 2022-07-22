@@ -50,21 +50,23 @@ class ChatViewController: UIViewController {
   }
   
   func displayMyMessage(cell: MessageCell) {
-    cell.YouAvatar.isHidden = true
-    cell.MeAvatar.isHidden = false
+    cell.youAvatar.isHidden = true
+    cell.meAvatar.isHidden = false
     cell.messageView.backgroundColor = UIColor(named: Constants.BrandColors.lightPurple)
     cell.messageLabel.textColor = UIColor(named: Constants.BrandColors.purple)
   }
   
   func displayNotMyMessage(cell: MessageCell) {
-    cell.MeAvatar.isHidden = true
-    cell.YouAvatar.isHidden = false
+    cell.meAvatar.isHidden = true
+    cell.youAvatar.isHidden = false
     cell.messageView.backgroundColor = UIColor(named: Constants.BrandColors.purple)
     cell.messageLabel.textColor = UIColor(named: Constants.BrandColors.lightPurple)
   }
   
   @IBAction func sendPressed(_ sender: UIButton) {
-    if messageTextfield.text == "" {return}
+    if messageTextfield.text == "" {
+      return
+    }
     if let sender = Auth.auth().currentUser?.email, let message = messageTextfield.text {
       db.collection(Constants.FStore.collectionName).addDocument(data: [
         Constants.FStore.senderField:sender,
